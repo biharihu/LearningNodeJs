@@ -1,26 +1,18 @@
+const path = require("path");
 const express = require("express");
-
-console.log(__dirname);
-console.log(__filename);
 
 const app = express();
 
-//
+const publickDirectoryPath = path.join(__dirname, "../public");
+
+app.set("view engine", "hbs");
+app.use(express.static(publickDirectoryPath));
+
 app.get("/", (req, res) => {
-  res.send("<h1>Weather</h1>");
+  res.render("index");
 });
 
-app.get("/help", (req, res) => {
-  res.send({
-    name: "Akash",
-    age: 27,
-  });
-});
-
-app.get("/about", (req, res) => {
-  res.send("<h1>About</h1>");
-});
-
+//
 app.get("/weather", (req, res) => {
   res.send({
     forcast: "It is snowing",
